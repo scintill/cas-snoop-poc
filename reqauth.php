@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Denver');
+
 require_once('phpCAS/CAS.php');
 
 phpCAS::client(CAS_VERSION_2_0,'cas.byu.edu',443,'cas');

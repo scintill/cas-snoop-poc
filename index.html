@@ -2,18 +2,26 @@
 <head>
     <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
     <script>
+        var loaded = false;
         $(function() {
             $('#snoopframe').on('load', function() {
                 var doc = this.contentDocument;
                 var loc = this.contentWindow.location;
                 if (!loc.href) {
                     $('#message').html('Failed snooping on you! You are either not logged in to CAS (<a href="http://cas.byu.edu/cas/login?service='+$('#finauth-link')[0].href+'">log in now to see the demo</a>), or you have enabled the "warn me before signing into another site" option.');
+                } else {
+                    window.setTimeout(function() {
+                        if (!loaded) {
+                            $('#message').html('Looks like something went wrong: '+doc.body.innerHTML);
+                        }
+                    }, 200);
                 }
             })
               .attr('src', 'getinfo.php');
         });
 
         function onSnoopFrameLoad(personInfo) {
+            loaded = true;
             var html = "Name: "+personInfo.sort_name+"<br/>";
             if (personInfo.job_title) {
                 html += personInfo.job_title+"<br/>";

@@ -1,6 +1,10 @@
 <?php
 
 function getAuthed($url, $key) {
+    if (date_default_timezone_get() != 'America/Denver') {
+        throw new RuntimeException('incorrect timezone');
+    }
+    
     $timestamp = date('Y-m-d H:i:s');
     $hmac = base64_encode(hash_hmac('sha512', $url.$timestamp, $key->sharedSecret, true));
 
