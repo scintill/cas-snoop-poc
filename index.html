@@ -19,7 +19,8 @@
             })
               .attr('src', 'getinfo.php');
         });
-
+        
+        // `onSnoopFrameLoad` will display information on a person that has been "snooped" on
         function onSnoopFrameLoad(personInfo) {
             loaded = true;
             var html = "Name: "+personInfo.sort_name+"<br/>";
