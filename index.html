@@ -5,17 +5,11 @@
         var loaded = false;
         $(function() {
             $('#snoopframe').on('load', function() {
-                var doc = this.contentDocument;
-                var loc = this.contentWindow.location;
-                if (!loc.href) {
-                    $('#message').html('Failed snooping on you! You are either not logged in to CAS (<a href="http://cas.byu.edu/cas/login?service='+$('#finauth-link')[0].href+'">log in now to see the demo</a>), or you have enabled the "warn me before signing into another site" option.');
-                } else {
-                    window.setTimeout(function() {
-                        if (!loaded) {
-                            $('#message').html('Looks like something went wrong: '+doc.body.innerHTML);
-                        }
-                    }, 200);
-                }
+				window.setTimeout(function() {
+					if (!loaded) {
+						$('#message').html('Timeout &ndash; looks like we failed snooping on you! You are either not logged in to CAS (<a href="http://cas.byu.edu/cas/login?service='+$('#finauth-link')[0].href+'">log in now to see the demo</a>), or you have enabled the "warn me before signing into another site" option.');
+					}
+				}, 8000);
             })
               .attr('src', 'getinfo.php');
         });
@@ -52,7 +46,7 @@
 
 <iframe src="about:blank" id="snoopframe" style="visibility: hidden; display: none; height: 1px"></iframe>
 
-<p id="message" />
+<p id="message">Loading&hellip;</p>
 
 </body>
 
